@@ -1,0 +1,12 @@
+{
+    "name": "huoyi/e-store",
+    "authors": [
+        {
+            "name": "Mirror Li",
+            "email": "huoyinlijing@qq.com"
+        }
+    ],
+    "require": {
+        "bailangzhan/yii2-webuploader": "dev-master"
+    }
+}
