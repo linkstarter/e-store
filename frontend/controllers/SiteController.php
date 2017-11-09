@@ -12,7 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use common\models\GoodsSearch;
 /**
  * Site controller
  */
@@ -72,7 +72,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $goods = new GoodsSearch();
+        $dataProvider = $goods->search(Yii::$app->request->queryParams);
+        return $this->render('index',[
+            'goods' => $goods,
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /**

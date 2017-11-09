@@ -99,4 +99,28 @@ class Goods extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Adminuser::className(), ['id' => 'g_masterid']);
     }
+
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                $this->create_at = time();
+                $this->update_at = time();
+            }
+            else
+            {
+                $this->update_at = time();
+            }
+            
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+            
+        
+    }
 }
