@@ -35,7 +35,7 @@ class GoodsController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {   var_dump('@common');die;
         $searchModel = new GoodsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
