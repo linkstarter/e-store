@@ -7,6 +7,13 @@
         }
     ],
     "require": {
-        "bailangzhan/yii2-webuploader": "dev-master"
+        "bailangzhan/yii2-webuploader": "dev-master",
+        "dmstr/yii2-adminlte-asset": "2.*"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
