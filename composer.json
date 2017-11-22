@@ -8,7 +8,8 @@
     ],
     "require": {
         "bailangzhan/yii2-webuploader": "dev-master",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "mdmsoft/yii2-admin": "~2.0"
     },
     "repositories": {
         "packagist": {
