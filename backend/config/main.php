@@ -19,7 +19,20 @@ return [
     'aliases' => [
         '@mdm/admin' => '@vendor/mdmsoft/yii2-admin',
     ],
+    'language' => 'zh-CN',
     'components' => [
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages', // if advanced application, set @frontend/messages
+                    'sourceLanguage' => 'zh-CN',
+                    'fileMap' => [
+                    //'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'common\models\Adminuser',
             'enableAutoLogin' => true,

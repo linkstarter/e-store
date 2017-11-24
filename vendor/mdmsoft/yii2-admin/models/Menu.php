@@ -93,11 +93,11 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('rbac-admin', 'ID'),
-            'name' => Yii::t('rbac-admin', '名称'),
-            'parent' => Yii::t('rbac-admin', '父级'),
+            'name' => Yii::t('rbac-admin', 'Name'),
+            'parent' => Yii::t('rbac-admin', 'Parent'),
             'parent_name' => Yii::t('rbac-admin', 'Parent Name'),
-            'route' => Yii::t('rbac-admin', '路由'),
-            'order' => Yii::t('rbac-admin', '等级'),
+            'route' => Yii::t('rbac-admin', 'Route'),
+            'order' => Yii::t('rbac-admin', 'Order'),
             'data' => Yii::t('rbac-admin', 'Data'),
         ];
     }

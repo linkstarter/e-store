@@ -18,6 +18,7 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  *
  * @property Goods[] $goods
+ * @property Inventory[] $inventories 
  */
 class Adminuser extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -51,10 +52,10 @@ class Adminuser extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
-            'nickname' => 'Nickname',
-            'password' => 'Password',
-            'email' => 'Email',
+            'username' => '用户名',
+            'nickname' => '昵称',
+            'password' => '密码',
+            'email' => '邮箱',
             'profile' => 'Profile',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
@@ -70,7 +71,13 @@ class Adminuser extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Goods::className(), ['g_masterid' => 'id']);
     }
 
-
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getInventories()
+    {
+        return $this->hasMany(Inventory::className(), ['g_masterid' => 'id']);
+    }
         /**
      * @inheritdoc
      */

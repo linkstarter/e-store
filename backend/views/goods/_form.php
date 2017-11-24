@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'g_description')->textarea(['rows' => 6]) ?>
 
+    <!-- <?= $form->field($model, 'g_num')->textInput() ?> -->
+
     <!-- <?= $form->field($model, 'g_masterid')->textInput() ?>
 
     <?= $form->field($model, 'create_at')->textInput() ?>

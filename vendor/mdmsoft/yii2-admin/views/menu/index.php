@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel mdm\admin\models\searchs\Menu */
 
-$this->title = Yii::t('rbac-admin', '菜单');
+$this->title = Yii::t('rbac-admin', 'Menu');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <p>
-        <?= Html::a(Yii::t('rbac-admin', '创建菜单'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', [
                     'class' => 'form-control', 'id' => null
                 ]),
-                'label' => Yii::t('rbac-admin', '父级'),
+                'label' => Yii::t('rbac-admin', 'Parent'),
             ],
             'route',
             'order',

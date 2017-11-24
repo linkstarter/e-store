@@ -22,6 +22,7 @@ use Yii;
  * @property User[] $ids
  * @property Comment[] $comments
  * @property Adminuser $gMaster
+ * @property Inventory[] $inventories 
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -33,6 +34,10 @@ class Goods extends \yii\db\ActiveRecord
         return 'goods';
     }
 
+    // public function attributes()
+    // {
+    //     return array_merge(parent::attributes(),['g_num']);
+    // }
     /**
      * @inheritdoc
      */
@@ -43,6 +48,7 @@ class Goods extends \yii\db\ActiveRecord
             [['g_name', 'g_thumb', 'g_price', 'g_type', 'g_description'], 'required'],
             [['g_status', 'g_type', 'g_masterid', 'create_at', 'update_at'], 'integer'],
             [['g_price'], 'number'],
+            // [['g_num'], 'integer'],
             [['g_description'], 'string'],
             [['g_name', 'g_thumb'], 'string', 'max' => 128],
             [['g_masterid'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['g_masterid' => 'id']],
@@ -65,6 +71,7 @@ class Goods extends \yii\db\ActiveRecord
             'g_masterid' => '卖家',
             'create_at' => '创建日期',
             'update_at' => '修改日期',
+            // 'g_num' => '商品数量'
         ];
     }
 
@@ -98,6 +105,14 @@ class Goods extends \yii\db\ActiveRecord
     public function getGMaster()
     {
         return $this->hasOne(Adminuser::className(), ['id' => 'g_masterid']);
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getInventories()
+    {   
+        return $this->hasMany(Inventory::className(), ['g_id' => 'g_id']);
     }
 
     public function beforeSave($insert)

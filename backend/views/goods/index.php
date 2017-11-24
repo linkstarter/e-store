@@ -22,6 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'class' => \yii\grid\CheckboxColumn::className(),
+                'checkboxOptions' => function ($model, $key, $index, $column){
+                    return ['value' => $model->g_id,'class' => 'checkbox'];
+                }
+            ],
             ['class' => 'yii\grid\SerialColumn'],
 
             'g_id',
@@ -29,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'g_thumb',
             'g_status',
             'g_price',
+            // 'g_num',
             // 'g_type',
             // 'g_description:ntext',
             // 'g_masterid',
