@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Goods;
-use common\models\GoodsSearch;
+use common\models\Inventory;
+use common\models\InventorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
-use common\components\Upload;
-use common\models\Inventory;
+
 /**
- * GoodsController implements the CRUD actions for Goods model.
+ * InventoryController implements the CRUD actions for Inventory model.
  */
-class GoodsController extends Controller
+class InventoryController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class GoodsController extends Controller
     }
 
     /**
-     * Lists all Goods models.
+     * Lists all Inventory models.
      * @return mixed
      */
     public function actionIndex()
-    {   
-        $searchModel = new GoodsSearch();
+    {
+        $searchModel = new InventorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,35 +45,28 @@ class GoodsController extends Controller
     }
 
     /**
-     * Displays a single Goods model.
+     * Displays a single Inventory model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Goods model.
+     * Creates a new Inventory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Goods();
+        $model = new Inventory();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->g_status = 1;
-            $model->g_masterid = yii::$app->user->id;
-            if($model->save())
-            {
-                return $this->redirect(['view', 'id' => $model->g_id]);
-            }
-            
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,7 +75,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Updates an existing Goods model.
+     * Updates an existing Inventory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +85,7 @@ class GoodsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->g_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,7 +94,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Deletes an existing Goods model.
+     * Deletes an existing Inventory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,63 +106,19 @@ class GoodsController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionUpload()
-    {
-        try
-        {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            $model = new Upload();
-            $info = $model->upImage();
-
-            if($info && is_array($info))
-            {
-                return $info;
-            }
-            else
-            {
-                return ['code' => 1, 'msg' => 'error'];
-            }
-        }
-        catch(\Exception $e)
-        {
-            return ['code' => 1, 'msg' => $e->getMessage()];
-        }
-    }
-
     /**
-     * Finds the Goods model based on its primary key value.
+     * Finds the Inventory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Goods the loaded model
+     * @return Inventory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Goods::findOne($id)) !== null) {
+        if (($model = Inventory::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionApprove($id)
-    {
-        $model = $this->findModel($id);
-        $inventory = new Inventory();
-        if($model->approve())
-        {
-            $inventory->g_id = $model->g_id;
-            $inventory->g_masterid = $model->g_masterid;
-            if($inventory->save())
-            {
-                return $this->redirect(['inventory/index']);
-            }
-            else
-            {
-                echo '入库错误';
-            }
-            
         }
     }
 }

@@ -22,6 +22,7 @@ use Yii;
  * @property User[] $ids
  * @property Comment[] $comments
  * @property Adminuser $gMaster
+ * @property Goodsstatus $gStatus
  * @property Inventory[] $inventories 
  */
 class Goods extends \yii\db\ActiveRecord
@@ -52,6 +53,7 @@ class Goods extends \yii\db\ActiveRecord
             [['g_description'], 'string'],
             [['g_name', 'g_thumb'], 'string', 'max' => 128],
             [['g_masterid'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['g_masterid' => 'id']],
+            [['g_status'], 'exist', 'skipOnError' => true, 'targetClass' => Goodsstatus::className(), 'targetAttribute' => ['g_status' => 'id']], 
         ];
     }
 
@@ -110,6 +112,13 @@ class Goods extends \yii\db\ActiveRecord
     /**
     * @return \yii\db\ActiveQuery
     */
+     public function getGStatus()
+     {
+         return $this->hasOne(Goodsstatus::className(), ['id' => 'g_status']);
+     }
+    /**
+    * @return \yii\db\ActiveQuery
+    */
     public function getInventories()
     {   
         return $this->hasMany(Inventory::className(), ['g_id' => 'g_id']);
@@ -135,7 +144,11 @@ class Goods extends \yii\db\ActiveRecord
         {
             return false;
         }
-            
-        
+    }
+
+    public function approve()
+    {
+        $this->g_status = 2;
+        return ($this->save()?true:false);
     }
 }

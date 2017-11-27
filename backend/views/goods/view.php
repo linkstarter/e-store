@@ -31,7 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'g_id',
             'g_name',
             'g_thumb',
-            'g_status',
+            // 'g_status',
+            [
+                'attribute' => 'g_status',
+                'value' =>$model->gStatus->name,
+            ],
             'g_price',
             'g_type',
             'g_description:ntext',

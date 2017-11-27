@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use common\models\Goodsstatus;
 /* @var $this yii\web\View */
 /* @var $model common\models\Goods */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,7 +18,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'g_thumb')->widget('manks\FileInput',[]) ?>
 
-   <!--  <?= $form->field($model, 'g_status')->textInput() ?> -->
+    <?= $form->field($model, 'g_status')->dropDownList(Goodsstatus::find()
+                                            ->select(['name','id'])
+                                            ->orderBy('position')
+                                            ->indexBy('id')
+                                            ->column(),
+                                            ['prompt' => '请选择状态']); ?>
 
     <?= $form->field($model, 'g_price')->textInput(['maxlength' => true]) ?>
 
@@ -26,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'g_description')->textarea(['rows' => 6]) ?>
 
-    <!-- <?= $form->field($model, 'g_num')->textInput() ?> -->
+
 
     <!-- <?= $form->field($model, 'g_masterid')->textInput() ?>
 

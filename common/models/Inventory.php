@@ -34,6 +34,7 @@ class Inventory extends \yii\db\ActiveRecord
     {
         return [
             [['g_id', 'g_masterid', 'inventory', 'sales_volume'], 'required'],
+            [['g_id', 'g_masterid'], 'required'],
             [['g_id', 'g_masterid', 'inventory', 'sales_volume'], 'integer'],
             [['g_masterid'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['g_masterid' => 'id']],
             [['g_id'], 'exist', 'skipOnError' => true, 'targetClass' => Goods::className(), 'targetAttribute' => ['g_id' => 'g_id']],
@@ -47,10 +48,10 @@ class Inventory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'g_id' => 'G ID',
-            'g_masterid' => 'G Masterid',
-            'inventory' => 'Inventory',
-            'sales_volume' => 'Sales Volume',
+            'g_id' => '商品ID',
+            'g_masterid' => '卖家',
+            'inventory' => '库存',
+            'sales_volume' => '销量',
         ];
     }
 
