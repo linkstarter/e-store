@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\Response;
 use common\components\Upload;
 use common\models\Inventory;
+use common\models\Goodsstatus;
 /**
  * GoodsController implements the CRUD actions for Goods model.
  */
@@ -69,7 +70,7 @@ class GoodsController extends Controller
         $model = new Goods();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->g_status = 1;
+            $model->g_status = Goodsstatus::DEFAULT_STATUS;
             $model->g_masterid = yii::$app->user->id;
             if($model->save())
             {
@@ -94,7 +95,7 @@ class GoodsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->g_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -158,11 +159,13 @@ class GoodsController extends Controller
     public function actionApprove($id)
     {
         $model = $this->findModel($id);
-        $inventory = new Inventory();
         if($model->approve())
         {
+            $inventory = new Inventory();
             $inventory->g_id = $model->g_id;
             $inventory->g_masterid = $model->g_masterid;
+            $inventory->inventory = $inventory::DEFAULT_INVENTORY;
+            $inventory->sales_volume = $inventory::DEFAULT_SALES_VOLUME;
             if($inventory->save())
             {
                 return $this->redirect(['inventory/index']);

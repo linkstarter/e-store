@@ -14,6 +14,7 @@ use Yii;
  */
 class Goodsstatus extends \yii\db\ActiveRecord
 {
+    const DEFAULT_STATUS = 1;
     /**
      * @inheritdoc
      */

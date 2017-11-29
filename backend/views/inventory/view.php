@@ -29,8 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'g_id',
-            'g_masterid',
+            [
+                'attribute' => 'goods.g_name',
+                'label' => '商品名称',
+                'value' => $model->g->g_name,
+            ],
+            // 'g_masterid',
+            [
+                'attribute' => 'g_masterid',
+                'label' => '卖家',
+                'value' => $model->gMaster->nickname,
+            ],
             'inventory',
             'sales_volume',
         ],

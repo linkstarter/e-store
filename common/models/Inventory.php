@@ -18,6 +18,8 @@ use Yii;
  */
 class Inventory extends \yii\db\ActiveRecord
 {
+    const DEFAULT_INVENTORY = 0;
+    const DEFAULT_SALES_VOLUME = 0;
     /**
      * @inheritdoc
      */
