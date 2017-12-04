@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\GoodsSearch;
+use common\models\Goods;
 /**
  * Site controller
  */
@@ -60,7 +61,11 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                // 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'height' => 50,
+                'width' => 80,
+                'minLength' => 4,
+                'maxLength' => 4
             ],
         ];
     }
@@ -71,13 +76,11 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
-        $goods = new GoodsSearch();
-        $dataProvider = $goods->search(Yii::$app->request->queryParams);
-        return $this->render('index',[
-            'goods' => $goods,
-            'dataProvider' => $dataProvider
-        ]);
+    {   
+        $model = (new \yii\db\Query())
+                ->from('goods')
+                ->all();
+        return $this->render('index',['model' => $model]);
     }
 
     /**
@@ -215,4 +218,5 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
 }

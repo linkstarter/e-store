@@ -31,13 +31,14 @@ AppAsset::register($this);
         'brandLabel' => 'Mirror Store',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default navbar-fixed-top',
         ],
     ]);
     $menuItems = [
         ['label' => '首页', 'url' => ['/site/index']],
         ['label' => '关于', 'url' => ['/site/about']],
         ['label' => '联系', 'url' => ['/site/contact']],
+        ['label' => '购物车', 'url' => ['/cart/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
