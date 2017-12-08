@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Goodsstatus;
+use common\models\Category;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\GoodsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -33,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'g_id',
             'g_name',
-            'g_thumb',
+            [
+                'attribute' => 'g_type',
+                'value' => 'gType.name',
+                'filter' => Category::find()
+                            ->select(['name','id'])
+                            ->indexBy('id')
+                            ->column(),
+            ],
+            // 'g_thumb',
             // 'g_status',
             [
                 'attribute' => 'g_status',

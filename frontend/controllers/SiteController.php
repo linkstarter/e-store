@@ -14,6 +14,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\GoodsSearch;
 use common\models\Goods;
+use common\models\Category;
 /**
  * Site controller
  */
@@ -80,7 +81,14 @@ class SiteController extends Controller
         $model = (new \yii\db\Query())
                 ->from('goods')
                 ->all();
-        return $this->render('index',['model' => $model]);
+        $category = (new \yii\db\Query())
+                ->from('category')
+                ->all();
+
+        return $this->render('index', [
+            'model' => $model,
+            'category' => $category,
+        ]);
     }
 
     /**

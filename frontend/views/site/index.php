@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 use yii\widgets\ListView;
 use yii\grid\GridView;
+use yii\helpers\Url;
 $this->title = '漫商城';
 ?>
 <div class="search-box">
@@ -80,21 +81,29 @@ $this->title = '漫商城';
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
-	<div class="row">
-		<?php 
-		foreach($model as $key => $value)
-		{
+	<?php foreach($category as $category_key => $category_value)
+	{
+	?>
+		<h3><?= $category_value['name']?></h3>
+
+		<div class="row">
+			<?php foreach($model as $model_key => $model_value)
+			{
+				if($model_value['g_type'] == $category_value['id']){
 			?>
-			<div class="col-md-3">
-				<img src="<?= yii::$app->params['domain']?><?= $value['g_thumb']?>">
-				<h3><?= $value['g_name']?></h3>
-			</div>
+				<a href="<?= Url::to(['detail', 'id' => $model_value['g_id']])?>">
+					<div class="col-md-3">
+						<img src="<?= yii::$app->params['domain']?><?= $model_value['g_thumb']?>">
+						<h3><?= $model_value['g_name']?></h3>
+						<span>$<?= $model_value['g_price']?></span>
+					</div>
+				</a>
 			<?php 
-		}
-		?>
-		
-	</div>
+				}
+			}
+			?>
+		</div>
+	<?php } ?>
 	
 
 </div>

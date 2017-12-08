@@ -23,6 +23,7 @@ use Yii;
  * @property Comment[] $comments
  * @property Adminuser $gMaster
  * @property Goodsstatus $gStatus
+ * @property Category $gType
  * @property Inventory[] $inventories 
  */
 class Goods extends \yii\db\ActiveRecord
@@ -53,7 +54,8 @@ class Goods extends \yii\db\ActiveRecord
             [['g_description'], 'string'],
             [['g_name', 'g_thumb'], 'string', 'max' => 128],
             [['g_masterid'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['g_masterid' => 'id']],
-            [['g_status'], 'exist', 'skipOnError' => true, 'targetClass' => Goodsstatus::className(), 'targetAttribute' => ['g_status' => 'id']], 
+            [['g_status'], 'exist', 'skipOnError' => true, 'targetClass' => Goodsstatus::className(), 'targetAttribute' => ['g_status' => 'id']],
+            [['g_type'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['g_type' => 'id']],
         ];
     }
 
@@ -116,12 +118,21 @@ class Goods extends \yii\db\ActiveRecord
      {
          return $this->hasOne(Goodsstatus::className(), ['id' => 'g_status']);
      }
+     
     /**
     * @return \yii\db\ActiveQuery
     */
     public function getInventories()
     {   
         return $this->hasMany(Inventory::className(), ['g_id' => 'g_id']);
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getGType()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'g_type']);
     }
 
     public function beforeSave($insert)

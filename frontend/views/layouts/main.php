@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Mirror Store',
+        'brandLabel' => '漫城',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -73,7 +73,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Mirror <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <!-- <p class="pull-right"><?= Yii::powered() ?></p> -->
     </div>
 </footer>
 

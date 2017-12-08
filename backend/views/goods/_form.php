@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Goodsstatus;
+use common\models\Category;
 /* @var $this yii\web\View */
 /* @var $model common\models\Goods */
 /* @var $form yii\widgets\ActiveForm */
@@ -27,7 +28,11 @@ use common\models\Goodsstatus;
 
     <?= $form->field($model, 'g_price')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'g_type')->textInput() ?>
+    <?= $form->field($model, 'g_type')->dropDownList(Category::find()
+                                            ->select(['name','id'])
+                                            ->indexBy('id')
+                                            ->column(),
+                                            ['prompt' => '请选择类型']); ?>
 
     <?= $form->field($model, 'g_description')->textarea(['rows' => 6]) ?>
 
